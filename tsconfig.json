@@ -1,0 +1,9 @@
+{
+  "extends": "@tsconfig/recommended/tsconfig.json",
+  "compilerOptions": {
+    "noEmit": true,
+    "module": "ES2015",
+    "moduleResolution": "Bundler"
+  },
+  "include": ["src/**/*"]
+}

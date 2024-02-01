@@ -1,0 +1,25 @@
+{
+  "name": "n4m-typescript",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "build": "esbuild src/main.ts --bundle --platform=node --external:max-api --target=node20 --outfile=code/main.js",
+    "watch": "npm run build --watch",
+    "start": "open ./patchers/main.maxpat",
+    "dev": "npm run watch & npm run start"
+  },
+  "engines": {
+    "node": ">=20.6"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@tsconfig/recommended": "^1.0.3",
+    "@types/max-api": "^2.0.3",
+    "@types/node": "^20.11.15",
+    "esbuild": "^0.20.0",
+    "typescript": "^5.3.3"
+  }
+}
