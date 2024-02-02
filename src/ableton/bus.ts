@@ -1,7 +1,7 @@
 import OSC from "osc-js";
-import { Logger } from "./logger";
+import { Logger } from "../logger";
 
-export class Ableton {
+export class AbletonBus {
   private osc = new OSC({ plugin: new OSC.DatagramPlugin() });
   private logger: Logger;
 
@@ -20,8 +20,8 @@ export class Ableton {
     this.osc.close();
   }
 
-  async send(address: string, message: string = "") {
-    this.osc.send(new OSC.Message(address, message), {
+  async send(address: string, ...args: any) {
+    this.osc.send(new OSC.Message(address, ...args), {
       port: 11000,
       host: "127.0.0.1",
     });
@@ -38,26 +38,9 @@ export class Ableton {
     });
   }
 
-  async sendReceive(address: string, message: string = "") {
-    await this.send(address, message);
+  async sendAndReturn(address: string, ...args: any) {
+    await this.send(address, ...args);
     const msg = await this.receive(address);
     return msg;
-  }
-}
-
-export class LiveAPI {
-  private ableton = new Ableton({ logger: new Logger() });
-
-  async getAppVersion() {
-    return this.ableton.sendReceive("/live/application/get/version");
-  }
-  async getTempo() {
-    return this.ableton.sendReceive("/live/song/get/tempo");
-  }
-  async test() {
-    return this.ableton.sendReceive("/live/test");
-  }
-  async getTrackNames() {
-    return this.ableton.sendReceive("/live/song/get/track_names");
   }
 }
