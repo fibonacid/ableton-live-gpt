@@ -1,14 +1,21 @@
-import { Logger } from "../logger";
-import { SongAPI } from "./apis/song";
 import { ApplicationAPI } from "./apis/application";
-import { AbletonBus } from "./bus";
-import { TrackAPI } from "./apis/track";
-import { ClipSlotAPI } from "./apis/clip-slot";
 import { ClipAPI } from "./apis/clip";
+import { ClipSlotAPI } from "./apis/clip-slot";
 import { DeviceAPI } from "./apis/device";
+import { SongAPI } from "./apis/song";
+import { TrackAPI } from "./apis/track";
+import { AbletonBus } from "./bus";
 
 export class AbletonController {
   private bus = new AbletonBus();
+
+  // Static links to APIs
+  static Application = ApplicationAPI;
+  static Track = TrackAPI;
+  static ClipSlot = ClipSlotAPI;
+  static Clip = ClipAPI;
+  static Device = DeviceAPI;
+  static Song = SongAPI;
 
   // Application API
   application = new ApplicationAPI(this.bus);
