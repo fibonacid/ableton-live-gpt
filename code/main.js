@@ -5361,14 +5361,21 @@ var require_osc = __commonJS({
 });
 
 // src/main.ts
-var import_max_api = __toESM(require("max-api"));
+var import_max_api2 = __toESM(require("max-api"));
 
 // src/ableton.ts
 var import_osc_js = __toESM(require_osc());
 var Ableton = class {
-  constructor() {
+  constructor(config) {
     this.osc = new import_osc_js.default({ plugin: new import_osc_js.default.DatagramPlugin() });
+    this.logger = config.logger;
     this.osc.open({ port: 11001, host: "0.0.0.0" });
+    this.osc.on("open", () => this.logger.info("OSC open"));
+    this.osc.on("error", (err) => this.logger.error("OSC error", err));
+    this.osc.on("/live/error", (msg) => this.logger.error("Ableton error", msg));
+  }
+  destroy() {
+    this.osc.close();
   }
   async send(address, message = "") {
     this.osc.send(new import_osc_js.default.Message(address, message), { port: 11e3, host: "127.0.0.1" });
@@ -5391,16 +5398,36 @@ var Ableton = class {
   }
 };
 
+// src/logger.ts
+var import_max_api = __toESM(require("max-api"));
+var Logger = class {
+  info(...args) {
+    console.info(...args);
+    import_max_api.default.post(...args, import_max_api.default.POST_LEVELS.INFO);
+  }
+  error(...args) {
+    console.error(...args);
+    import_max_api.default.post(...args, import_max_api.default.POST_LEVELS.ERROR);
+  }
+  warn(...args) {
+    console.warn(...args);
+    import_max_api.default.post(...args, import_max_api.default.POST_LEVELS.WARN);
+  }
+};
+
 // src/main.ts
-import_max_api.default.post("Hello from TypeScript");
-var ableton = new Ableton();
-import_max_api.default.addHandlers({
+var logger = new Logger();
+logger.info("Hello from Node");
+var ableton = new Ableton({
+  logger
+});
+import_max_api2.default.addHandlers({
   test() {
-    import_max_api.default.post("handling test command...");
+    logger.info("handling test command...");
     ableton.test().then((msg) => {
-      import_max_api.default.post(msg, import_max_api.default.POST_LEVELS.INFO);
+      logger.info(msg);
     }).catch((err) => {
-      import_max_api.default.post(err, import_max_api.default.POST_LEVELS.ERROR);
+      logger.error(err);
     });
   }
 });

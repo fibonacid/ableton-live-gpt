@@ -45,7 +45,7 @@
 					"numinlets" : 2,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 235.0, 289.0, 29.5, 22.0 ],
+					"patching_rect" : [ 205.0, 303.5, 29.5, 22.0 ],
 					"text" : "test"
 				}
 
@@ -641,8 +641,6 @@
 					"saved_object_attributes" : 					{
 						"autostart" : 1,
 						"defer" : 0,
-						"node_bin_path" : "",
-						"npm_bin_path" : "",
 						"watch" : 1
 					}
 ,
@@ -826,8 +824,8 @@
 			}
 , 			{
 				"name" : "main.js",
-				"bootpath" : "~/Developer/ableton-live-chatgpt/code",
-				"patcherrelativepath" : "../../ableton-live-chatgpt/code",
+				"bootpath" : "~/Developer/ableton-live-gpt/code",
+				"patcherrelativepath" : "../code",
 				"type" : "TEXT",
 				"implicit" : 1
 			}

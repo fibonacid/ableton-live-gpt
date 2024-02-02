@@ -1,10 +1,21 @@
 import OSC from 'osc-js';
+import { Logger } from './logger';
 
 export class Ableton {
     private osc = new OSC({ plugin: new OSC.DatagramPlugin() });
+    private logger: Logger;
 
-    constructor() {
+    constructor(config: { logger: Logger }) {
+        this.logger = config.logger;
+
         this.osc.open({ port: 11001, host: "0.0.0.0" });
+        this.osc.on("open", () => this.logger.info("OSC open"));
+        this.osc.on("error", (err: string) => this.logger.error("OSC error", err));
+        this.osc.on("/live/error", (msg: string) => this.logger.error("Ableton error", msg));
+    }
+
+    destroy() {
+        this.osc.close();
     }
 
     async send(address: string, message: string = "") {

@@ -1,17 +1,22 @@
 import MaxAPI from 'max-api';
 import { Ableton } from './ableton';
+import { Logger } from './logger';
 
-MaxAPI.post('Hello from TypeScript');
+const logger = new Logger();
+logger.info('Hello from Node');
 
-const ableton = new Ableton();
+const ableton = new Ableton({
+    logger
+});
 
 MaxAPI.addHandlers({
  test() {
-    MaxAPI.post('handling test command...');
+    logger.info('handling test command...');
     ableton.test().then((msg) => {
-        MaxAPI.post(msg, MaxAPI.POST_LEVELS.INFO);
+        logger.info(msg);
     }).catch((err: string) => {
-        MaxAPI.post(err, MaxAPI.POST_LEVELS.ERROR)
+        logger.error(err)
     });
  },
 })
+
