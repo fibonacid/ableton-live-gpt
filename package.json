@@ -7,7 +7,8 @@
     "build": "esbuild src/main.ts --bundle --platform=node --external:max-api --target=node20 --outfile=code/main.js",
     "watch": "npm run build --watch",
     "start": "open ./patchers/main.maxpat",
-    "dev": "npm run watch & npm run start"
+    "dev": "npm run watch & npm run start",
+    "format": "prettier --write src/**/*.ts"
   },
   "engines": {
     "node": ">=20.6"
