@@ -5385,7 +5385,6 @@ var Ableton = class {
       port: 11e3,
       host: "127.0.0.1"
     });
-    this.logger.info(`Sent OSC message to ${address} with ${message}`);
   }
   async receive(address) {
     return new Promise((resolve, reject) => {
@@ -5394,16 +5393,12 @@ var Ableton = class {
         clearTimeout(timeout);
         this.osc.off(address, unsubscribe);
         resolve(message);
-        this.logger.info(
-          `Received OSC message from ${address} with ${message}`
-        );
       });
     });
   }
-  async test() {
-    const addr = "/live/test";
-    await this.send(addr);
-    const msg = await this.receive(addr);
+  async sendReceive(address, message = "") {
+    await this.send(address, message);
+    const msg = await this.receive(address);
     return msg;
   }
 };
@@ -5434,7 +5429,17 @@ var ableton = new Ableton({
 import_max_api2.default.addHandlers({
   async test() {
     logger.info("handling test command...");
-    const result = await ableton.test();
+    const result = await ableton.sendReceive("/live/tempo");
+    import_max_api2.default.outlet(result);
+  },
+  async get_live_version() {
+    logger.info("handling get_live_version command...");
+    const result = await ableton.sendReceive("/live/application/get/version");
+    import_max_api2.default.outlet(result);
+  },
+  async get_tempo() {
+    logger.info("handling get_tempo command...");
+    const result = await ableton.sendReceive("/live/song/get/tempo");
     import_max_api2.default.outlet(result);
   }
 });

@@ -38,10 +38,9 @@ export class Ableton {
     });
   }
 
-  async test() {
-    const addr = "/live/test";
-    await this.send(addr);
-    const msg = await this.receive(addr);
+  async sendReceive(address: string, message: string = "") {
+    await this.send(address, message);
+    const msg = await this.receive(address);
     return msg;
   }
 }
