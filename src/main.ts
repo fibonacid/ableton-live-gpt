@@ -11,17 +11,14 @@ const ableton = new Ableton({
 
 MaxAPI.addHandlers({
   async test() {
-    logger.info("handling test command...");
-    const result = await ableton.sendReceive("/live/tempo");
+    const result = await ableton.sendReceive("/live/test");
     MaxAPI.outlet(result);
   },
   async get_live_version() {
-    logger.info("handling get_live_version command...");
     const result = await ableton.sendReceive("/live/application/get/version");
     MaxAPI.outlet(result);
   },
   async get_tempo() {
-    logger.info("handling get_tempo command...");
     const result = await ableton.sendReceive("/live/song/get/tempo");
     MaxAPI.outlet(result);
   },
