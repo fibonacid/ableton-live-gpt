@@ -1,4 +1,4 @@
-import { AbletonBus } from "../bus";
+import { AbletonBus } from "../../bus";
 
 export class ClipSlotAPI {
   constructor(private bus: AbletonBus) {}

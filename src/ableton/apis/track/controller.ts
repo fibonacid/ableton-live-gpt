@@ -1,4 +1,4 @@
-import { AbletonBus } from "../bus";
+import { AbletonBus } from "../../bus";
 
 export class TrackAPI {
   constructor(private bus: AbletonBus) {}
