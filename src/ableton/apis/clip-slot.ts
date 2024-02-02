@@ -1,8 +1,19 @@
 import { FunctionDefinition } from "openai/resources/shared.mjs";
+import { AbletonBus } from "../bus";
 
-export const clipFunctions: FunctionDefinition[] = [
-  {
-    name: "clip.create",
+export class ClipSlotAPI {
+  constructor(private bus: AbletonBus) {}
+
+  /** Create a clip in the slot */
+  async createClip(trackIndex: number, clipIndex: number, length: number) {
+    return this.bus.sendAndReturn("/live/clip_slot/create_clip", [
+      trackIndex,
+      clipIndex,
+      length,
+    ]);
+  }
+  static CreateClip: FunctionDefinition = {
+    name: "clip_slot.create_clip",
     description: "Create a clip in the slot",
     parameters: {
       trackIndex: {
@@ -18,9 +29,17 @@ export const clipFunctions: FunctionDefinition[] = [
         description: "The length of the clip in beats",
       },
     },
-  },
-  {
-    name: "clip.delete",
+  };
+
+  /** Delete a clip from the slot */
+  async deleteClip(trackIndex: number, clipIndex: number) {
+    return this.bus.sendAndReturn("/live/clip_slot/delete_clip", [
+      trackIndex,
+      clipIndex,
+    ]);
+  }
+  static DeleteClip: FunctionDefinition = {
+    name: "clip_slot.delete_clip",
     description: "Delete a clip from the slot",
     parameters: {
       trackIndex: {
@@ -32,5 +51,5 @@ export const clipFunctions: FunctionDefinition[] = [
         description: "The index of the clip in the track",
       },
     },
-  },
-];
+  };
+}
