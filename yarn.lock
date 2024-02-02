@@ -135,6 +135,13 @@
     "@types/node" "*"
     form-data "^4.0.0"
 
+"@types/node-osc@^6.0.3":
+  version "6.0.3"
+  resolved "https://registry.yarnpkg.com/@types/node-osc/-/node-osc-6.0.3.tgz#236718a39d5a4fd0cb9c8268f33fb139a805c2ce"
+  integrity sha512-f0JUTDVAlk/mV9RH6jE6g/8Y7l+Mvi3f1x7xv0RG3VI1PktaXEd60mR+4plpMS9VbRovFoPsS7qaaIDhFXdaEw==
+  dependencies:
+    "@types/node" "*"
+
 "@types/node@*", "@types/node@^20.11.15":
   version "20.11.15"
   resolved "https://registry.yarnpkg.com/@types/node/-/node-20.11.15.tgz#b853a86cfedbc768360c552b4653302b4e7417bf"
@@ -172,6 +179,11 @@ base-64@^0.1.0:
   version "0.1.0"
   resolved "https://registry.yarnpkg.com/base-64/-/base-64-0.1.0.tgz#780a99c84e7d600260361511c4877613bf24f6bb"
   integrity sha512-Y5gU45svrR5tI2Vt/X9GPd3L0HNIKzGu202EjxrXMpuc2V2CiKgemAbUUsqYmZJvPtCXoUKjNZwBJzsNScUbXA==
+
+binpack@~0:
+  version "0.1.0"
+  resolved "https://registry.yarnpkg.com/binpack/-/binpack-0.1.0.tgz#bd3d0974c3f2a0446e17df4f60b55a72a205a97e"
+  integrity sha512-KcSrsGiIKgklTWweVb9XnZPWO1/rGSsK3fwR7VnbDPbLKPlkvSKd/ZrJ1W712r6HzH5u0fa/AZCftATO09x8Aw==
 
 charenc@0.0.2:
   version "0.0.2"
@@ -309,6 +321,13 @@ node-fetch@^2.6.7:
   dependencies:
     whatwg-url "^5.0.0"
 
+node-osc@^9.1.0:
+  version "9.1.0"
+  resolved "https://registry.yarnpkg.com/node-osc/-/node-osc-9.1.0.tgz#956510b32bb9dc16d1cb0c50f29f9825d9530268"
+  integrity sha512-7Ey92VAnGAkQI0MfxFH365v6+wUyHU/EVt5/v4Q81w8b+F/pVQxvmEzPnp70IxvDipSgYtSGer/iZUHZeKCzwg==
+  dependencies:
+    osc-min "^1.1.1"
+
 openai@^4.26.0:
   version "4.26.0"
   resolved "https://registry.yarnpkg.com/openai/-/openai-4.26.0.tgz#0363b9d390727705b89cd1b1ea8e38af2afd53b6"
@@ -323,6 +342,13 @@ openai@^4.26.0:
     formdata-node "^4.3.2"
     node-fetch "^2.6.7"
     web-streams-polyfill "^3.2.1"
+
+osc-min@^1.1.1:
+  version "1.1.2"
+  resolved "https://registry.yarnpkg.com/osc-min/-/osc-min-1.1.2.tgz#3dcaff10f804c39b7080cf4c10fd7a4103cd9037"
+  integrity sha512-8DbiO8ME85R75stgNVCZtHxB9MNBBNcyy+isNBXrsFeinXGjwNAauvKVmGlfRas5VJWC/mhzIx7spR2gFvWxvg==
+  dependencies:
+    binpack "~0"
 
 tr46@~0.0.3:
   version "0.0.3"

@@ -1,5 +1,5 @@
 {
-	"name" : "n4m-typescript",
+	"name" : "ableton-live-gpt",
 	"version" : 1,
 	"creationdate" : 3789626441,
 	"modificationdate" : 3789639249,

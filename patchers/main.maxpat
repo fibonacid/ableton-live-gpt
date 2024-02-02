@@ -10,7 +10,7 @@
 		}
 ,
 		"classnamespace" : "box",
-		"rect" : [ 59.0, 106.0, 1292.0, 739.0 ],
+		"rect" : [ 59.0, 106.0, 717.0, 739.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 0,
 		"default_fontsize" : 12.0,
@@ -39,6 +39,18 @@
 		"subpatcher_template" : "",
 		"assistshowspatchername" : 0,
 		"boxes" : [ 			{
+				"box" : 				{
+					"id" : "obj-9",
+					"maxclass" : "message",
+					"numinlets" : 2,
+					"numoutlets" : 1,
+					"outlettype" : [ "" ],
+					"patching_rect" : [ 235.0, 289.0, 29.5, 22.0 ],
+					"text" : "test"
+				}
+
+			}
+, 			{
 				"box" : 				{
 					"id" : "obj-11",
 					"linecount" : 2,
@@ -629,6 +641,8 @@
 					"saved_object_attributes" : 					{
 						"autostart" : 1,
 						"defer" : 0,
+						"node_bin_path" : "",
+						"npm_bin_path" : "",
 						"watch" : 1
 					}
 ,
@@ -784,6 +798,13 @@
 				}
 
 			}
+, 			{
+				"patchline" : 				{
+					"destination" : [ "obj-10", 0 ],
+					"source" : [ "obj-9", 0 ]
+				}
+
+			}
  ],
 		"dependency_cache" : [ 			{
 				"name" : "fit_jweb_to_bounds.js",
@@ -806,7 +827,7 @@
 , 			{
 				"name" : "main.js",
 				"bootpath" : "~/Developer/ableton-live-chatgpt/code",
-				"patcherrelativepath" : "../../../../../Developer/ableton-live-chatgpt/code",
+				"patcherrelativepath" : "../../ableton-live-chatgpt/code",
 				"type" : "TEXT",
 				"implicit" : 1
 			}
