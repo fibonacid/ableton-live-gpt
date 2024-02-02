@@ -5,9 +5,9 @@
   "main": "index.js",
   "scripts": {
     "build": "esbuild src/main.ts --bundle --platform=node --external:max-api --target=node20 --outfile=code/main.js",
-    "watch": "npm run build --watch",
+    "watch": "yarn build --watch=forever",
     "start": "open ./patchers/main.maxpat",
-    "dev": "npm run watch & npm run start",
+    "dev": "yarn watch & yarn start",
     "format": "prettier --write src/**/*.ts"
   },
   "engines": {
