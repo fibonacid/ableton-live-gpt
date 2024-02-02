@@ -44,3 +44,20 @@ export class Ableton {
     return msg;
   }
 }
+
+export class LiveAPI {
+  private ableton = new Ableton({ logger: new Logger() });
+
+  async getAppVersion() {
+    return this.ableton.sendReceive("/live/application/get/version");
+  }
+  async getTempo() {
+    return this.ableton.sendReceive("/live/song/get/tempo");
+  }
+  async test() {
+    return this.ableton.sendReceive("/live/test");
+  }
+  async getTrackNames() {
+    return this.ableton.sendReceive("/live/song/get/track_names");
+  }
+}
