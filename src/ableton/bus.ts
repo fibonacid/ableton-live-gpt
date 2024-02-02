@@ -28,7 +28,7 @@ export class AbletonBus {
   }
 
   async receive(address: string) {
-    return new Promise<string>((resolve, reject) => {
+    return new Promise<any>((resolve, reject) => {
       const timeout = setTimeout(() => reject("Timeout"), 1000);
       const unsubscribe = this.osc.on(address, (message: string) => {
         clearTimeout(timeout);
