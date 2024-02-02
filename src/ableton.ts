@@ -1,27 +1,23 @@
-import { Client, Message, Server } from "node-osc";
-import MaxAPI from 'max-api';
+import OSC from 'osc-js';
 
 export class Ableton {
-    private readonly client = new Client("127.0.0.1", 11000);
-    private readonly server = new Server(11001, "0.0.0.0");
+    private osc = new OSC({ plugin: new OSC.DatagramPlugin() });
 
-    constructor() {}
+    constructor() {
+        this.osc.open({ port: 11001, host: "0.0.0.0" });
+    }
 
     async send(address: string, message: string = "") {
-        this.client.send(new Message(address, message), (err) => {
-            console.error(err);
-        });
+        this.osc.send(new OSC.Message(address, message), { port: 11000, host: "127.0.0.1"  });
     }
 
     async receive(address: string) {
-        return new Promise((resolve, reject) => {
+        return new Promise<string>((resolve, reject) => {
             const timeout = setTimeout(() => reject("Timeout"), 1000);
-            this.server.on('message', (msg, rinfo) => {
-                if (rinfo.address === address) {
-                    clearTimeout(timeout);
-                    MaxAPI.post(`Message: ${msg} from ${rinfo.address}:${rinfo.port}`);
-                    resolve(msg);
-                }
+            const unsubscribe = this.osc.on(address, (message: string) => {
+                clearTimeout(timeout); 
+                this.osc.off(address, unsubscribe); // remove listener
+                resolve(message); // forward message
             });
         });
     }
@@ -30,6 +26,6 @@ export class Ableton {
         const addr = "/live/test";
         await this.send(addr);
         const msg = await this.receive(addr);
-        console.log(msg);
+        return msg;
     }
 }

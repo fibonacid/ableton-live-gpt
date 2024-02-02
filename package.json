@@ -20,11 +20,11 @@
     "@types/max-api": "^2.0.3",
     "@types/node": "^20.11.15",
     "esbuild": "^0.20.0",
+    "osc-js": "^2.4.0",
     "typescript": "^5.3.3"
   },
   "dependencies": {
     "@types/node-osc": "^6.0.3",
-    "node-osc": "^9.1.0",
     "openai": "^4.26.0"
   }
 }

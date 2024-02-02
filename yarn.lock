@@ -180,11 +180,6 @@ base-64@^0.1.0:
   resolved "https://registry.yarnpkg.com/base-64/-/base-64-0.1.0.tgz#780a99c84e7d600260361511c4877613bf24f6bb"
   integrity sha512-Y5gU45svrR5tI2Vt/X9GPd3L0HNIKzGu202EjxrXMpuc2V2CiKgemAbUUsqYmZJvPtCXoUKjNZwBJzsNScUbXA==
 
-binpack@~0:
-  version "0.1.0"
-  resolved "https://registry.yarnpkg.com/binpack/-/binpack-0.1.0.tgz#bd3d0974c3f2a0446e17df4f60b55a72a205a97e"
-  integrity sha512-KcSrsGiIKgklTWweVb9XnZPWO1/rGSsK3fwR7VnbDPbLKPlkvSKd/ZrJ1W712r6HzH5u0fa/AZCftATO09x8Aw==
-
 charenc@0.0.2:
   version "0.0.2"
   resolved "https://registry.yarnpkg.com/charenc/-/charenc-0.0.2.tgz#c0a1d2f3a7092e03774bfa83f14c0fc5790a8667"
@@ -321,13 +316,6 @@ node-fetch@^2.6.7:
   dependencies:
     whatwg-url "^5.0.0"
 
-node-osc@^9.1.0:
-  version "9.1.0"
-  resolved "https://registry.yarnpkg.com/node-osc/-/node-osc-9.1.0.tgz#956510b32bb9dc16d1cb0c50f29f9825d9530268"
-  integrity sha512-7Ey92VAnGAkQI0MfxFH365v6+wUyHU/EVt5/v4Q81w8b+F/pVQxvmEzPnp70IxvDipSgYtSGer/iZUHZeKCzwg==
-  dependencies:
-    osc-min "^1.1.1"
-
 openai@^4.26.0:
   version "4.26.0"
   resolved "https://registry.yarnpkg.com/openai/-/openai-4.26.0.tgz#0363b9d390727705b89cd1b1ea8e38af2afd53b6"
@@ -343,12 +331,12 @@ openai@^4.26.0:
     node-fetch "^2.6.7"
     web-streams-polyfill "^3.2.1"
 
-osc-min@^1.1.1:
-  version "1.1.2"
-  resolved "https://registry.yarnpkg.com/osc-min/-/osc-min-1.1.2.tgz#3dcaff10f804c39b7080cf4c10fd7a4103cd9037"
-  integrity sha512-8DbiO8ME85R75stgNVCZtHxB9MNBBNcyy+isNBXrsFeinXGjwNAauvKVmGlfRas5VJWC/mhzIx7spR2gFvWxvg==
+osc-js@^2.4.0:
+  version "2.4.0"
+  resolved "https://registry.yarnpkg.com/osc-js/-/osc-js-2.4.0.tgz#3d86ee350eac55731eca01588d588e6a73794057"
+  integrity sha512-9cvB8m6zt/iCsmeDdFJaD4mjC8preB1Gio+NVmjT0S3qxiejTfJ8vGudyTQciL9yqQHEuINNYS5Kb94+Ceqekg==
   dependencies:
-    binpack "~0"
+    ws "^8.9.0"
 
 tr46@~0.0.3:
   version "0.0.3"
@@ -387,3 +375,8 @@ whatwg-url@^5.0.0:
   dependencies:
     tr46 "~0.0.3"
     webidl-conversions "^3.0.0"
+
+ws@^8.9.0:
+  version "8.16.0"
+  resolved "https://registry.yarnpkg.com/ws/-/ws-8.16.0.tgz#d1cd774f36fbc07165066a60e40323eab6446fd4"
+  integrity sha512-HS0c//TP7Ina87TfiPUz1rQzMhHrl/SG2guqRcTOIUYD2q8uhUdNHZYJUaQ8aTGPzCh+c6oawMKW35nFl1dxyQ==
