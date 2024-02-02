@@ -5372,13 +5372,20 @@ var Ableton = class {
     this.osc.open({ port: 11001, host: "0.0.0.0" });
     this.osc.on("open", () => this.logger.info("OSC open"));
     this.osc.on("error", (err) => this.logger.error("OSC error", err));
-    this.osc.on("/live/error", (msg) => this.logger.error("Ableton error", msg));
+    this.osc.on(
+      "/live/error",
+      (msg) => this.logger.error("Ableton error", msg)
+    );
   }
   destroy() {
     this.osc.close();
   }
   async send(address, message = "") {
-    this.osc.send(new import_osc_js.default.Message(address, message), { port: 11e3, host: "127.0.0.1" });
+    this.osc.send(new import_osc_js.default.Message(address, message), {
+      port: 11e3,
+      host: "127.0.0.1"
+    });
+    this.logger.info(`Sent OSC message to ${address} with ${message}`);
   }
   async receive(address) {
     return new Promise((resolve, reject) => {
@@ -5387,6 +5394,9 @@ var Ableton = class {
         clearTimeout(timeout);
         this.osc.off(address, unsubscribe);
         resolve(message);
+        this.logger.info(
+          `Received OSC message from ${address} with ${message}`
+        );
       });
     });
   }
@@ -5422,12 +5432,9 @@ var ableton = new Ableton({
   logger
 });
 import_max_api2.default.addHandlers({
-  test() {
+  async test() {
     logger.info("handling test command...");
-    ableton.test().then((msg) => {
-      logger.info(msg);
-    }).catch((err) => {
-      logger.error(err);
-    });
+    const result = await ableton.test();
+    import_max_api2.default.outlet(result);
   }
 });

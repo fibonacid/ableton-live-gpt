@@ -10,15 +10,9 @@ const ableton = new Ableton({
 });
 
 MaxAPI.addHandlers({
-  test() {
+  async test() {
     logger.info("handling test command...");
-    ableton
-      .test()
-      .then((msg) => {
-        logger.info(msg);
-      })
-      .catch((err: string) => {
-        logger.error(err);
-      });
+    const result = await ableton.test();
+    MaxAPI.outlet(result);
   },
 });

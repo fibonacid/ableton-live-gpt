@@ -12,7 +12,7 @@ export class Ableton {
     this.osc.on("open", () => this.logger.info("OSC open"));
     this.osc.on("error", (err: string) => this.logger.error("OSC error", err));
     this.osc.on("/live/error", (msg: string) =>
-      this.logger.error("Ableton error", msg),
+      this.logger.error("Ableton error", msg)
     );
   }
 
