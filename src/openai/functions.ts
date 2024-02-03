@@ -33,7 +33,7 @@ export const functionMap: Record<string, Function> = {
   [Song.PrevCue.name]: controller.song.prevCue,
 };
 
-const functionDefinitions: Record<string, FunctionDefinition> = {
+export const functionDefinitions: Record<string, FunctionDefinition> = {
   [Application.GetVersion.name]: AbletonController.Application.GetVersion,
   [Application.Test.name]: AbletonController.Application.Test,
   [Application.Reload.name]: AbletonController.Application.Reload,
