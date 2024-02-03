@@ -1,16 +1,18 @@
 import MaxAPI from "max-api";
 
 export class Logger {
-  info(...args: string[]) {
+  info(...args: any[]) {
     console.info(...args);
     MaxAPI.post(...args, MaxAPI.POST_LEVELS.INFO);
   }
-  error(...args: string[]) {
+  error(...args: any[]) {
     console.error(...args);
     MaxAPI.post(...args, MaxAPI.POST_LEVELS.ERROR);
   }
-  warn(...args: string[]) {
+  warn(...args: any[]) {
     console.warn(...args);
     MaxAPI.post(...args, MaxAPI.POST_LEVELS.WARN);
   }
 }
+
+export const logger = new Logger();
