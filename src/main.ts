@@ -26,3 +26,5 @@ async function main() {
     }
   }
 }
+
+main();
