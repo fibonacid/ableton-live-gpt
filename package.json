@@ -5,7 +5,7 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "build": "esbuild src/main.ts --bundle --platform=node --external:max-api --target=node20 --outfile=code/main.js",
+    "build": "esbuild src/main.ts --format=esm --bundle --platform=node --external:max-api --target=node20 --outfile=code/main.js",
     "watch": "yarn build --watch=forever",
     "start": "open ./patchers/main.maxpat",
     "dev": "yarn watch & yarn start",

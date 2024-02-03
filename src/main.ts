@@ -1,12 +1,28 @@
-import { AbletonBus } from "./ableton/bus";
-import { Logger } from "./logger";
 import dotenv from "dotenv";
+import { Logger } from "./logger";
+import { openai } from "./openai/client";
+import { initialMessages } from "./openai/messages";
+import { tools } from "./openai/tools";
 
 dotenv.config();
 
 const logger = new Logger();
 logger.info("Hello from Node");
 
-const ableton = new AbletonBus({
-  logger,
-});
+async function main() {
+  const stream = await openai.chat.completions.create({
+    messages: initialMessages,
+    model: "gpt-4",
+    tools: tools,
+    stream: true,
+  });
+  for await (const chunk of stream) {
+    const [choice] = chunk.choices;
+    const toolCalls = choice.delta.tool_calls;
+    if (toolCalls) {
+      for (const toolCall of toolCalls) {
+        logger.info(`Tool call: ${JSON.stringify(toolCall)}`);
+      }
+    }
+  }
+}
