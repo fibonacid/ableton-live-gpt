@@ -67,10 +67,3 @@ export const functionDefinitions: Record<string, FunctionDefinition> = {
   [Application.GetLogLevel.name]: AbletonController.Application.GetLogLevel,
   [Application.SetLogLevel.name]: AbletonController.Application.SetLogLevel,
 };
-
-if (import.meta.vitest) {
-  const { it, expect } = import.meta.vitest;
-  it("should have all function definitions", () => {
-    expect(Object.keys(functionMap)).toEqual(Object.keys(functionDefinitions));
-  });
-}

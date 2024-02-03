@@ -4,7 +4,11 @@
     "noEmit": true,
     "module": "ES2022",
     "moduleResolution": "Bundler",
-    "types": ["vitest/importMeta"]
+    "types": ["vitest/importMeta"],
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["./src/*"]
+    }
   },
-  "include": ["src/**/*"]
+  "include": ["src", "__tests__", "__mocks__"]
 }

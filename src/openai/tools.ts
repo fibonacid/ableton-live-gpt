@@ -9,10 +9,3 @@ export const tools: ChatCompletionTool[] = Object.values(
     function: definition,
   };
 });
-
-if (import.meta.vitest) {
-  const { it, expect } = import.meta.vitest;
-  it("should have all function definitions", () => {
-    expect(tools).toHaveLength(Object.keys(functionDefinitions).length);
-  });
-}

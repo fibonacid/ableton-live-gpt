@@ -3,9 +3,8 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
-  "type": "module",
   "scripts": {
-    "build": "esbuild src/main.ts --format=esm --bundle --platform=node --external:max-api --target=node20 --outfile=code/main.js",
+    "build": "esbuild src/main.ts --bundle --platform=node --external:max-api --target=node20 --outfile=code/main.js",
     "watch": "yarn build --watch=forever",
     "start": "open ./ableton-live-gpt.maxproj",
     "dev": "yarn watch & yarn start",
