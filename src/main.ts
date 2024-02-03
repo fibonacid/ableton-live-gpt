@@ -1,6 +1,5 @@
 import dotenv from "dotenv";
 import { Logger } from "./logger";
-import { openai } from "./openai/client";
 import { initialMessages } from "./openai/messages";
 import { tools } from "./openai/tools";
 
@@ -10,6 +9,7 @@ const logger = new Logger();
 logger.info("Hello from Node");
 
 async function main() {
+  const { openai } = await import("./openai/client");
   const stream = await openai.chat.completions.create({
     messages: initialMessages,
     model: "gpt-4",
