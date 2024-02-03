@@ -9,7 +9,7 @@ export class ClipAPI {
     return this.bus.sendAndReturn("/live/clip/fire", [trackId, clipId]);
   }
   static Fire: FunctionDefinition = {
-    name: "clip.fire",
+    name: "clip__fire",
     description: "Start clip playback",
     parameters: {
       trackId: {
@@ -28,7 +28,7 @@ export class ClipAPI {
     return this.bus.sendAndReturn("/live/clip/stop", [trackId, clipId]);
   }
   static Stop: FunctionDefinition = {
-    name: "clip.stop",
+    name: "clip__stop",
     description: "Stop clip playback",
     parameters: {
       trackId: {
@@ -47,7 +47,7 @@ export class ClipAPI {
     return this.bus.sendAndReturn("/live/clip/name", [trackId, clipId, name]);
   }
   static SetName: FunctionDefinition = {
-    name: "clip.set_name",
+    name: "clip__set_name",
     description: "Set the name of a clip",
     parameters: {
       trackId: {

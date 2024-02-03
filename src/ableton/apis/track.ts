@@ -9,7 +9,7 @@ export class TrackAPI {
     return this.bus.sendAndReturn("/live/track/stop_all_clips", [trackId]);
   }
   static StopAllClips: FunctionDefinition = {
-    name: "track.stop_all_clips",
+    name: "track__top_all_clips",
     description: "Stop all clips on track",
     parameters: {
       trackId: {
@@ -24,7 +24,7 @@ export class TrackAPI {
     return this.bus.sendAndReturn("/live/track/mute", [trackId]);
   }
   static Mute: FunctionDefinition = {
-    name: "track.mute",
+    name: "track__mute",
     description: "Mute a track",
     parameters: {
       trackId: {
@@ -39,7 +39,7 @@ export class TrackAPI {
     return this.bus.sendAndReturn("/live/track/solo", [trackId]);
   }
   static Solo: FunctionDefinition = {
-    name: "track.solo",
+    name: "track__solo",
     description: "Solo a track",
     parameters: {
       trackId: {
@@ -54,7 +54,7 @@ export class TrackAPI {
     return this.bus.sendAndReturn("/live/track/arm", [trackId]);
   }
   static Arm: FunctionDefinition = {
-    name: "track.arm",
+    name: "track__arm",
     description: "Arm a track for recording",
     parameters: {
       trackId: {

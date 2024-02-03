@@ -9,7 +9,7 @@ export class DeviceAPI {
     return this.bus.sendAndReturn("/live/device/get/name", [trackId, deviceId]);
   }
   static GetName: FunctionDefinition = {
-    name: "device.get_name",
+    name: "device__get_name",
     description: "Get device name",
     parameters: {
       trackId: {
@@ -38,7 +38,7 @@ export class DeviceAPI {
     ]);
   }
   static SetParameter: FunctionDefinition = {
-    name: "device.set_parameter",
+    name: "device__set_parameter",
     description: "Set a device parameter value",
     parameters: {
       trackId: {
@@ -69,7 +69,7 @@ export class DeviceAPI {
     ]);
   }
   static SetDeviceOnOff: FunctionDefinition = {
-    name: "device.set_on_off",
+    name: "device__set_on_off",
     description: "Turn device on/off",
     parameters: {
       trackId: {

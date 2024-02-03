@@ -9,7 +9,7 @@ export class ApplicationAPI {
     return this.bus.sendAndReturn("/live/test");
   }
   static Test: FunctionDefinition = {
-    name: "application.test",
+    name: "application__test",
     description:
       "Display a confirmation message in Live, and sends an OSC reply to /live/test",
   };
@@ -19,7 +19,7 @@ export class ApplicationAPI {
     return this.bus.sendAndReturn("/live/application/get/version");
   }
   static GetVersion: FunctionDefinition = {
-    name: "application.get_version",
+    name: "application__get_version",
     description: "Query Live's version",
   };
 
@@ -28,7 +28,7 @@ export class ApplicationAPI {
     return this.bus.send("/live/api/reload");
   }
   static Reload: FunctionDefinition = {
-    name: "application.reload",
+    name: "application__reload",
     description:
       "Initiates a live reload of the AbletonOSC server code. Used in development only.",
   };
@@ -38,7 +38,7 @@ export class ApplicationAPI {
     return this.bus.sendAndReturn("/live/api/get/log_level");
   }
   static GetLogLevel: FunctionDefinition = {
-    name: "application.get_log_level",
+    name: "application__get_log_level",
     description: "Returns the current log level. Default is info.",
   };
 
@@ -47,7 +47,7 @@ export class ApplicationAPI {
     this.bus.send("/live/api/set/log_level", { log_level });
   }
   static SetLogLevel: FunctionDefinition = {
-    name: "application.set_log_level",
+    name: "application__set_log_level",
     description:
       "Set the log level, which can be one of: debug, info, warning, error, critical.",
     parameters: {

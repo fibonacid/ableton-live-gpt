@@ -9,7 +9,7 @@ export class SongAPI {
     return this.bus.sendAndReturn("/live/song/start_playing");
   }
   static StartPlaying: FunctionDefinition = {
-    name: "song.start_playing",
+    name: "song__start_playing",
     description: "Start session playback",
   };
 
@@ -18,7 +18,7 @@ export class SongAPI {
     return this.bus.sendAndReturn("/live/song/stop_playing");
   }
   static StopPlaying: FunctionDefinition = {
-    name: "song.stop_playing",
+    name: "song__stop_playing",
     description: "Stop session playback",
   };
 
@@ -27,7 +27,7 @@ export class SongAPI {
     return this.bus.sendAndReturn("/live/song/tempo", [tempo]);
   }
   static SetTempo: FunctionDefinition = {
-    name: "song.set_tempo",
+    name: "song__set_tempo",
     description: "Set the current song tempo",
     parameters: {
       tempo: {
@@ -42,7 +42,7 @@ export class SongAPI {
     return this.bus.sendAndReturn("/live/song/next_cue");
   }
   static NextCue: FunctionDefinition = {
-    name: "song.next_cue",
+    name: "song__next_cue",
     description: "Jump to next cue point",
   };
 
@@ -51,7 +51,7 @@ export class SongAPI {
     return this.bus.sendAndReturn("/live/song/prev_cue");
   }
   static PrevCue: FunctionDefinition = {
-    name: "song.prev_cue",
+    name: "song__prev_cue",
     description: "Jump to previous cue point",
   };
 }

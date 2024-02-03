@@ -9,3 +9,5 @@ export const tools: ChatCompletionTool[] = Object.values(
     function: definition,
   };
 });
+
+console.log(tools);

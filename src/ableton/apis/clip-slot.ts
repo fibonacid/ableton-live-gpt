@@ -13,7 +13,7 @@ export class ClipSlotAPI {
     ]);
   }
   static CreateClip: FunctionDefinition = {
-    name: "clip_slot.create_clip",
+    name: "clip_slot__create_clip",
     description: "Create a clip in the slot",
     parameters: {
       trackIndex: {
@@ -39,7 +39,7 @@ export class ClipSlotAPI {
     ]);
   }
   static DeleteClip: FunctionDefinition = {
-    name: "clip_slot.delete_clip",
+    name: "clip_slot__delete_clip",
     description: "Delete a clip from the slot",
     parameters: {
       trackIndex: {

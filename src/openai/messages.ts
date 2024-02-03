@@ -1,5 +1,4 @@
 import { ChatCompletionMessageParam } from "openai/resources/index.mjs";
-import { SongAPI } from "../ableton/apis/song";
 
 export const initialMessages: ChatCompletionMessageParam[] = [
   {
