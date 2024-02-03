@@ -3,7 +3,7 @@ import { AbletonController } from "../ableton/controller";
 const controller = new AbletonController();
 const { Application, Track, Device, ClipSlot, Clip, Song } = AbletonController;
 
-export const functionMap = {
+export const functionMap: Record<string, Function> = {
   [Application.GetVersion.name]: controller.application.getVersion,
   [Application.Test.name]: controller.application.test,
   [Application.Reload.name]: controller.application.reload,
@@ -30,6 +30,15 @@ export const functionMap = {
   [Song.SetTempo.name]: controller.song.setTempo,
   [Song.NextCue.name]: controller.song.nextCue,
   [Song.PrevCue.name]: controller.song.prevCue,
-} as const;
+};
 
-export type FunctionName = keyof typeof functionMap;
+const functionDefinitions = {
+  [Application.GetVersion.name]: AbletonController.Application.GetVersion,
+};
+
+if (import.meta.vitest) {
+  const { it, expect } = import.meta.vitest;
+  it("should have all function definitions", () => {
+    expect(Object.keys(functionMap)).toEqual(Object.keys(functionDefinitions));
+  });
+}
