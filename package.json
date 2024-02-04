@@ -30,6 +30,8 @@
     "dotenv": "^16.4.1",
     "langchain": "^0.1.12",
     "openai": "^4.26.0",
-    "vitest": "^1.2.2"
+    "vitest": "^1.2.2",
+    "zod": "^3.22.4",
+    "zod-to-json-schema": "^3.22.4"
   }
 }

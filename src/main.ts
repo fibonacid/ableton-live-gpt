@@ -1,6 +1,8 @@
 import dotenv from "dotenv";
 import { Logger } from "./logger";
 import MaxAPI from "max-api";
+import { createAgentExecutor } from "./langchain/agent";
+import { HumanMessage } from "langchain/schema";
 
 dotenv.config();
 
@@ -10,7 +12,9 @@ logger.info("Hello from Node");
 MaxAPI.addHandler("text", async (...args) => {
   const message = args.join(" ");
   logger.info(`Received message: ${message}`);
-  const { handler } = await import("./langchain/chat");
-  const response = await handler(message);
-  logger.info(`Response: ${response}`);
+  const agentExecutor = await createAgentExecutor();
+  const response = await agentExecutor.invoke({
+    input: message,
+  });
+  logger.info(`Response: ${JSON.stringify(response)}`);
 });
