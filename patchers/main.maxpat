@@ -72,7 +72,7 @@
 					"outlettype" : [ "", "int", "", "" ],
 					"parameter_enable" : 0,
 					"patching_rect" : [ 196.5, 294.0, 151.0, 95.0 ],
-					"text" : "Set bpm to 80"
+					"text" : "What is the current tempo"
 				}
 
 			}
@@ -475,7 +475,7 @@
 					"numoutlets" : 1,
 					"offset" : [ 0.0, 0.0 ],
 					"outlettype" : [ "bang" ],
-					"patching_rect" : [ 399.5, 289.0, 592.0, 501.0 ],
+					"patching_rect" : [ 399.5, 289.0, 570.0, 472.0 ],
 					"viewvisibility" : 1
 				}
 
@@ -667,8 +667,6 @@
 					"saved_object_attributes" : 					{
 						"autostart" : 1,
 						"defer" : 0,
-						"node_bin_path" : "",
-						"npm_bin_path" : "",
 						"watch" : 1
 					}
 ,

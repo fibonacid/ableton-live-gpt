@@ -11,7 +11,7 @@ import { tools } from "./tools";
  * Define your chat model to use.
  */
 const model = new ChatOpenAI({
-  modelName: "gpt-4",
+  modelName: "gpt-3.5-turbo",
   temperature: 0,
 });
 
@@ -31,8 +31,10 @@ const modelWithFunctions = model.bind({
 const runnableAgent = RunnableSequence.from([
   {
     input: (i: { input: string; steps: AgentStep[] }) => i.input,
-    agent_scratchpad: (i: { input: string; steps: AgentStep[] }) =>
-      formatToOpenAIFunctionMessages(i.steps),
+    agent_scratchpad: (i: { input: string; steps: AgentStep[] }) => {
+      console.log(i.steps);
+      return formatToOpenAIFunctionMessages(i.steps);
+    },
   },
   prompt,
   modelWithFunctions,

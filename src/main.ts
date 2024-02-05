@@ -10,14 +10,16 @@ logger.info("Hello from Node");
 
 MaxAPI.addHandler("text", async (...args) => {
   const message = args.join(" ");
-  logger.info(`Received message: ${message}`);
   const { executor } = await import("./langchain/agent");
-  const response = await executor.invoke({ input: message });
-  logger.info(`Response: ${JSON.stringify(response)}`);
+  try {
+    const response = await executor.invoke({ input: message });
+    logger.info(response);
+  } catch (err) {
+    logger.error(err);
+  }
 });
 
 MaxAPI.addHandler("test", async () => {
-  logger.info("Test message");
   const result = await controller.application.test();
-  logger.info(`Result: ${JSON.stringify(result)}`);
+  logger.info(result);
 });

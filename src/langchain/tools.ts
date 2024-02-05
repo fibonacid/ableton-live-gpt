@@ -1,15 +1,13 @@
 import { controller } from "@/ableton/controller";
-import { logger } from "@/logger";
 import { DynamicTool } from "langchain/tools";
 
 const getTempoTool = new DynamicTool({
-  name: "getTempo",
+  name: "get_tempo",
   description: "Calls the Song API to get the current bpm",
   async func() {
-    logger.info("Calling API to get curent tempo");
-    const tempo = await controller.song.getTempo();
-    logger.info("Tempo is", tempo);
-    return tempo;
+    const result = await controller.song.getTempo();
+    const bpm = result.args[0];
+    return `The bpm is ${bpm}`;
   },
 });
 
