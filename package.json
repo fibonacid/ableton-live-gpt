@@ -5,9 +5,8 @@
   "main": "index.js",
   "scripts": {
     "build": "esbuild src/main.ts --bundle --platform=node --external:max-api --target=node20 --outfile=code/main.js",
-    "watch": "yarn build --watch",
+    "watch": "npm run build --watch",
     "start": "open ./ableton-live-gpt.maxproj",
-    "dev": "concurrently 'yarn start' 'yarn watch'",
     "format": "prettier --write src/**/*.ts",
     "test": "vitest"
   },

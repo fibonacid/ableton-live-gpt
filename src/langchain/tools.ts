@@ -5,11 +5,16 @@ import { z } from "zod";
 
 const getTempoTool = new DynamicTool({
   name: "get_tempo",
-  description: "Calls the Song API to get the current bpm",
+  description: "Queries the song tempo in beats per minute (bpm)",
   async func() {
-    const result = await controller.song.getTempo();
-    const bpm = result.args[0];
-    return `The bpm is ${bpm}`;
+    try {
+      const result = await controller.song.getTempo();
+      const [bpm] = result.args;
+      return `Current tempo is ${bpm} bpm`;
+    } catch (err) {
+      logger.error(err);
+      return "Failed to get tempo";
+    }
   },
 });
 
@@ -20,26 +25,42 @@ const setTempoTool = new DynamicStructuredTool({
     bpm: z.number().describe("The tempo in beats per minute (bpm)"),
   }),
   async func(input) {
-    const result = await controller.song.setTempo(input.bpm);
-    return `${result}`;
+    const { bpm } = input;
+    try {
+      await controller.song.setTempo(bpm);
+      return `Tempo set to ${bpm} bpm`;
+    } catch (err) {
+      logger.error(err);
+      return "Failed to set tempo";
+    }
   },
 });
 
 const startPlayingTool = new DynamicTool({
   name: "start_playing",
-  description: "Calls the Song API and starts session playback",
+  description: "Start session playback ",
   async func() {
-    const result = await controller.song.startPlaying();
-    return `${result}`;
+    try {
+      await controller.song.startPlaying();
+      return "Playback started";
+    } catch (err) {
+      logger.error(err);
+      return "Failed to start playback";
+    }
   },
 });
 
 const stopPlaying = new DynamicTool({
   name: "stop_playing",
-  description: "Calls the Song API and stops session playback",
+  description: "Stop session playback",
   async func() {
-    const result = await controller.song.stopPlaying();
-    return `${result}`;
+    try {
+      await controller.song.stopPlaying();
+      return "Playback stopped";
+    } catch (err) {
+      logger.error(err);
+      return "Failed to stop playback";
+    }
   },
 });
 
@@ -61,9 +82,28 @@ const isPlaying = new DynamicTool({
   name: "is_playing",
   description: "Query whether the song is currently playing",
   async func() {
-    const result = await controller.song.isPlaying();
-    const [check] = result.args;
-    return check ? "Song is playing" : "Song is not playing";
+    try {
+      const result = await controller.song.isPlaying();
+      const [check] = result.args;
+      return check ? "Song is playing" : "Song is not playing";
+    } catch (err) {
+      logger.error(err);
+      return "Failed to check if song is playing";
+    }
+  },
+});
+
+const captureMidi = new DynamicTool({
+  name: "capture_midi",
+  description: "Capture midi",
+  async func() {
+    try {
+      await controller.song.captureMidi();
+      return "Midi capture activated";
+    } catch (err) {
+      logger.error(err);
+      return "Failed to activate midi capture";
+    }
   },
 });
 
@@ -74,4 +114,5 @@ export const tools = [
   stopPlaying,
   continuePlaying,
   isPlaying,
+  captureMidi,
 ];

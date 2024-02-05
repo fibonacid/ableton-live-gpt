@@ -10,7 +10,7 @@
 		}
 ,
 		"classnamespace" : "box",
-		"rect" : [ 34.0, 99.0, 1073.0, 823.0 ],
+		"rect" : [ 34.0, 99.0, 939.0, 823.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 0,
 		"default_fontsize" : 12.0,
@@ -39,6 +39,42 @@
 		"subpatcher_template" : "",
 		"assistshowspatchername" : 0,
 		"boxes" : [ 			{
+				"box" : 				{
+					"id" : "obj-8",
+					"maxclass" : "newobj",
+					"numinlets" : 1,
+					"numoutlets" : 1,
+					"outlettype" : [ "" ],
+					"patching_rect" : [ 37.5, 245.0, 142.0, 22.0 ],
+					"text" : "loadmess npm run watch"
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"id" : "obj-30",
+					"maxclass" : "message",
+					"numinlets" : 2,
+					"numoutlets" : 1,
+					"outlettype" : [ "" ],
+					"patching_rect" : [ 272.0, 690.0, 115.0, 22.0 ],
+					"text" : "text toggle playback"
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"id" : "obj-27",
+					"maxclass" : "message",
+					"numinlets" : 2,
+					"numoutlets" : 1,
+					"outlettype" : [ "" ],
+					"patching_rect" : [ 42.0, 275.0, 113.0, 22.0 ],
+					"text" : "script npm run build"
+				}
+
+			}
+, 			{
 				"box" : 				{
 					"fontsize" : 18.492648655692133,
 					"id" : "obj-22",
@@ -72,7 +108,7 @@
 					"outlettype" : [ "", "int", "", "" ],
 					"parameter_enable" : 0,
 					"patching_rect" : [ 196.5, 294.0, 151.0, 95.0 ],
-					"text" : "What is the current tempo"
+					"text" : "stop playback"
 				}
 
 			}
@@ -475,20 +511,8 @@
 					"numoutlets" : 1,
 					"offset" : [ 0.0, 0.0 ],
 					"outlettype" : [ "bang" ],
-					"patching_rect" : [ 399.5, 289.0, 570.0, 472.0 ],
+					"patching_rect" : [ 399.5, 289.0, 400.0, 220.0 ],
 					"viewvisibility" : 1
-				}
-
-			}
-, 			{
-				"box" : 				{
-					"id" : "obj-47",
-					"linecount" : 2,
-					"maxclass" : "comment",
-					"numinlets" : 1,
-					"numoutlets" : 0,
-					"patching_rect" : [ 41.5, 264.5, 150.0, 33.0 ],
-					"text" : "The whole family of script control messages"
 				}
 
 			}
@@ -667,6 +691,8 @@
 					"saved_object_attributes" : 					{
 						"autostart" : 1,
 						"defer" : 0,
+						"node_bin_path" : "",
+						"npm_bin_path" : "",
 						"watch" : 1
 					}
 ,
@@ -798,6 +824,13 @@
 , 			{
 				"patchline" : 				{
 					"destination" : [ "obj-10", 0 ],
+					"source" : [ "obj-27", 0 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
+					"destination" : [ "obj-10", 0 ],
 					"midpoints" : [ 102.5, 237.5, 29.5, 237.5 ],
 					"source" : [ "obj-28", 0 ]
 				}
@@ -808,6 +841,13 @@
 					"destination" : [ "obj-10", 0 ],
 					"midpoints" : [ 459.0, 260.0, 29.5, 260.0 ],
 					"source" : [ "obj-3", 0 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
+					"destination" : [ "obj-10", 0 ],
+					"source" : [ "obj-30", 0 ]
 				}
 
 			}
@@ -840,6 +880,13 @@
 					"destination" : [ "obj-10", 0 ],
 					"midpoints" : [ 51.0, 385.0, 29.5, 385.0 ],
 					"source" : [ "obj-41", 0 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
+					"destination" : [ "obj-10", 0 ],
+					"source" : [ "obj-8", 0 ]
 				}
 
 			}

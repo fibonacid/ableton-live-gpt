@@ -4,27 +4,35 @@ import { AbletonBus } from "../bus";
 export class SongAPI {
   constructor(private bus: AbletonBus) {}
 
+  private async exec(path: string, ...args: any[]) {
+    return await this.bus.sendAndReturn(`/live/song/${path}`, args);
+  }
+
   async getTempo() {
-    return await this.bus.sendAndReturn("/live/song/get/tempo");
+    return await this.exec("get/tempo");
   }
 
   async setTempo(bpm: number) {
-    return await this.bus.sendAndReturn("/live/song/set/tempo", bpm);
+    return await this.exec("set/tempo", bpm);
   }
 
   async startPlaying() {
-    return await this.bus.sendAndReturn("/live/song/start_playing");
+    return await this.exec("start_playing");
   }
 
   async stopPlaying() {
-    return await this.bus.sendAndReturn("/live/song/stop_playing");
+    return await this.exec("stop_playing");
   }
 
   async continuePlaying() {
-    return await this.bus.sendAndReturn("/live/song/continue_playing");
+    return await this.exec("continue_playing");
   }
 
   async isPlaying() {
-    return await this.bus.sendAndReturn("/live/song/get/is_playing");
+    return await this.exec("get/is_playing");
+  }
+
+  async captureMidi() {
+    return await this.exec("capture_midi");
   }
 }
