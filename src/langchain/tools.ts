@@ -24,4 +24,37 @@ const setTempoTool = new DynamicStructuredTool({
   },
 });
 
-export const tools = [getTempoTool, setTempoTool];
+const startPlayingTool = new DynamicTool({
+  name: "start_playing",
+  description: "Calls the Song API and starts session playback",
+  async func() {
+    const result = await controller.song.startPlaying();
+    return `${result}`;
+  },
+});
+
+const stopPlaying = new DynamicTool({
+  name: "stop_playing",
+  description: "Calls the Song API and stops session playback",
+  async func() {
+    const result = await controller.song.stopPlaying();
+    return `${result}`;
+  },
+});
+
+const continuePlaying = new DynamicTool({
+  name: "continue_playing",
+  description: "Calls the Song API and continues session playback",
+  async func() {
+    const result = await controller.song.continuePlaying();
+    return `${result}`;
+  },
+});
+
+export const tools = [
+  getTempoTool,
+  setTempoTool,
+  startPlayingTool,
+  stopPlaying,
+  continuePlaying,
+];
