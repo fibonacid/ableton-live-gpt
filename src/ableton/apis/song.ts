@@ -7,4 +7,8 @@ export class SongAPI {
   async getTempo() {
     return await this.bus.sendAndReturn("/live/song/get/tempo");
   }
+
+  async setTempo(bpm: number) {
+    return await this.bus.sendAndReturn("/live/song/set/tempo", bpm);
+  }
 }

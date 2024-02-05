@@ -11,11 +11,12 @@ logger.info("Hello from Node");
 MaxAPI.addHandler("text", async (...args) => {
   const message = args.join(" ");
   const { executor } = await import("./langchain/agent");
+  logger.info(`Sending message to agent: '${message}'`);
   try {
     const response = await executor.invoke({ input: message });
-    logger.info(response);
+    logger.info("Agent Response", JSON.stringify(response));
   } catch (err) {
-    logger.error(err);
+    logger.error("Agent Error:", err);
   }
 });
 

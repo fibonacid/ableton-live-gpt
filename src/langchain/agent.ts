@@ -32,7 +32,6 @@ const runnableAgent = RunnableSequence.from([
   {
     input: (i: { input: string; steps: AgentStep[] }) => i.input,
     agent_scratchpad: (i: { input: string; steps: AgentStep[] }) => {
-      console.log(i.steps);
       return formatToOpenAIFunctionMessages(i.steps);
     },
   },

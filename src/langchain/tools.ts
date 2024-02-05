@@ -1,5 +1,6 @@
 import { controller } from "@/ableton/controller";
-import { DynamicTool } from "langchain/tools";
+import { DynamicStructuredTool, DynamicTool } from "langchain/tools";
+import { z } from "zod";
 
 const getTempoTool = new DynamicTool({
   name: "get_tempo",
@@ -11,4 +12,16 @@ const getTempoTool = new DynamicTool({
   },
 });
 
-export const tools = [getTempoTool];
+const setTempoTool = new DynamicStructuredTool({
+  name: "set_tempo",
+  description: "Calls the Song API and sets the current tempo",
+  schema: z.object({
+    bpm: z.number().describe("The tempo in beats per minute (bpm)"),
+  }),
+  async func(input) {
+    const result = await controller.song.setTempo(input.bpm);
+    return `${result}`;
+  },
+});
+
+export const tools = [getTempoTool, setTempoTool];
