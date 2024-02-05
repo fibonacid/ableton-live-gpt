@@ -1,34 +1,60 @@
-import { ChatPromptTemplate } from "@langchain/core/prompts";
 import { ChatOpenAI } from "@langchain/openai";
-import { AgentExecutor, createOpenAIFunctionsAgent } from "langchain/agents";
-import { pull } from "langchain/hub";
-import { tools } from "./tools";
+import { DynamicTool } from "langchain/tools";
+import { controller } from "@/ableton/controller";
+import { ChatPromptTemplate, MessagesPlaceholder } from "langchain/prompts";
+import { convertToOpenAIFunction } from "@langchain/core/utils/function_calling";
+import { AgentExecutor, AgentStep } from "langchain/agents";
+import { formatToOpenAIFunctionMessages } from "langchain/agents/format_scratchpad";
+import { OpenAIFunctionsAgentOutputParser } from "langchain/agents/openai/output_parser";
+import { RunnableSequence } from "langchain/runnables";
+import { logger } from "@/logger";
 
-export async function createAgentExecutor() {
-  const prompt = ChatPromptTemplate.fromMessages([
-    [
-      "system",
-      "You are a smart ableton live controller. You receive commands and execute them.",
-    ],
-  ]);
+/**
+ * Define your chat model to use.
+ */
+const model = new ChatOpenAI({
+  modelName: "gpt-4",
+  temperature: 0,
+});
 
-  const llm = new ChatOpenAI({
-    openAIApiKey: process.env.OPENAI_API_KEY,
-    modelName: "gpt-3.5-turbo-1106",
-    temperature: 0,
-  });
+const setTempoTool = new DynamicTool({
+  name: "setTempo",
+  description: "Set the BPM of the song",
+  func: async (input: string) => {
+    const bpm = parseInt(input);
+    logger.info(`Setting tempo to ${bpm} BPM`);
+    await controller.song.setTempo(bpm);
+    return `Tempo set to ${input} BPM`;
+  },
+});
 
-  const agent = await createOpenAIFunctionsAgent({
-    llm,
-    tools,
-    prompt,
-  });
+const tools = [setTempoTool];
 
-  const agentExecutor = new AgentExecutor({
-    agent,
-    tools,
-    verbose: false,
-  });
+const prompt = ChatPromptTemplate.fromMessages([
+  [
+    "system",
+    "You are a smart ableton live controller. You receive commands and execute them.",
+  ],
+  ["human", "{input}"],
+  new MessagesPlaceholder("agent_scratchpad"),
+]);
 
-  return agentExecutor;
-}
+const modelWithFunctions = model.bind({
+  functions: tools.map((tool) => convertToOpenAIFunction(tool)),
+});
+
+const runnableAgent = RunnableSequence.from([
+  {
+    input: (i: { input: string; steps: AgentStep[] }) => i.input,
+    agent_scratchpad: (i: { input: string; steps: AgentStep[] }) =>
+      formatToOpenAIFunctionMessages(i.steps),
+  },
+  prompt,
+  modelWithFunctions,
+  new OpenAIFunctionsAgentOutputParser(),
+]);
+
+export const executor = AgentExecutor.fromAgentAndTools({
+  agent: runnableAgent,
+  tools,
+});

@@ -1,7 +1,6 @@
 import dotenv from "dotenv";
 import MaxAPI from "max-api";
 import { controller } from "./ableton/controller";
-import { createAgentExecutor } from "./langchain/agent";
 import { Logger } from "./logger";
 
 dotenv.config();
@@ -12,10 +11,8 @@ logger.info("Hello from Node");
 MaxAPI.addHandler("text", async (...args) => {
   const message = args.join(" ");
   logger.info(`Received message: ${message}`);
-  const agentExecutor = await createAgentExecutor();
-  const response = await agentExecutor.invoke({
-    input: message,
-  });
+  const { executor } = await import("./langchain/agent");
+  const response = await executor.invoke({ input: message });
   logger.info(`Response: ${JSON.stringify(response)}`);
 });
 
