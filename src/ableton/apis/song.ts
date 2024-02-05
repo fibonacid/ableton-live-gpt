@@ -23,4 +23,8 @@ export class SongAPI {
   async continuePlaying() {
     return await this.bus.sendAndReturn("/live/song/continue_playing");
   }
+
+  async isPlaying() {
+    return await this.bus.sendAndReturn("/live/song/get/is_playing");
+  }
 }

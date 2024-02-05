@@ -1,4 +1,5 @@
 import { controller } from "@/ableton/controller";
+import { logger } from "@/logger";
 import { DynamicStructuredTool, DynamicTool } from "langchain/tools";
 import { z } from "zod";
 
@@ -44,10 +45,25 @@ const stopPlaying = new DynamicTool({
 
 const continuePlaying = new DynamicTool({
   name: "continue_playing",
-  description: "Calls the Song API and continues session playback",
+  description: "Resume session playback",
   async func() {
-    const result = await controller.song.continuePlaying();
-    return `${result}`;
+    try {
+      await controller.song.continuePlaying();
+      return "Playback session resumed";
+    } catch (err) {
+      logger.error(err);
+      return "Failed to resume playback";
+    }
+  },
+});
+
+const isPlaying = new DynamicTool({
+  name: "is_playing",
+  description: "Query whether the song is currently playing",
+  async func() {
+    const result = await controller.song.isPlaying();
+    const [check] = result.args;
+    return check ? "Song is playing" : "Song is not playing";
   },
 });
 
@@ -57,4 +73,5 @@ export const tools = [
   startPlayingTool,
   stopPlaying,
   continuePlaying,
+  isPlaying,
 ];
