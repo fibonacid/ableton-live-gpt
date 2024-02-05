@@ -35,3 +35,5 @@ export class AbletonController {
   // Device API
   device = new DeviceAPI(this.bus);
 }
+
+export const controller = new AbletonController();

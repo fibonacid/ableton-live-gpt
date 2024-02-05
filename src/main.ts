@@ -1,8 +1,8 @@
 import dotenv from "dotenv";
-import { Logger } from "./logger";
 import MaxAPI from "max-api";
+import { controller } from "./ableton/controller";
 import { createAgentExecutor } from "./langchain/agent";
-import { HumanMessage } from "langchain/schema";
+import { Logger } from "./logger";
 
 dotenv.config();
 
@@ -17,4 +17,10 @@ MaxAPI.addHandler("text", async (...args) => {
     input: message,
   });
   logger.info(`Response: ${JSON.stringify(response)}`);
+});
+
+MaxAPI.addHandler("test", async () => {
+  logger.info("Test message");
+  const result = await controller.application.test();
+  logger.info(`Result: ${JSON.stringify(result)}`);
 });

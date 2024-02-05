@@ -1,8 +1,7 @@
-import { AbletonController } from "@/ableton/controller";
+import { controller } from "@/ableton/controller";
+import { logger } from "@/logger";
 import { DynamicStructuredTool } from "langchain/tools";
 import { z } from "zod";
-
-const controller = new AbletonController();
 
 const setTempoTool = new DynamicStructuredTool({
   name: "set_tempo",
@@ -11,6 +10,7 @@ const setTempoTool = new DynamicStructuredTool({
     bpm: z.number().min(1).max(300),
   }),
   async func(input, runManager) {
+    logger.info(`Setting tempo to ${input.bpm}`);
     await controller.song.setTempo(input.bpm);
     return "Tempo set!";
   },

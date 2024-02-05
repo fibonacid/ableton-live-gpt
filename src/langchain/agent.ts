@@ -1,16 +1,16 @@
-import type { ChatPromptTemplate } from "@langchain/core/prompts";
+import { ChatPromptTemplate } from "@langchain/core/prompts";
 import { ChatOpenAI } from "@langchain/openai";
 import { AgentExecutor, createOpenAIFunctionsAgent } from "langchain/agents";
 import { pull } from "langchain/hub";
 import { tools } from "./tools";
 
 export async function createAgentExecutor() {
-  // Get the prompt to use - you can modify this!
-  // If you want to see the prompt in full, you can at:
-  // https://smith.langchain.com/hub/hwchase17/openai-functions-agent
-  const prompt = await pull<ChatPromptTemplate>(
-    "hwchase17/openai-functions-agent"
-  );
+  const prompt = ChatPromptTemplate.fromMessages([
+    [
+      "system",
+      "You are a smart ableton live controller. You receive commands and execute them.",
+    ],
+  ]);
 
   const llm = new ChatOpenAI({
     openAIApiKey: process.env.OPENAI_API_KEY,
@@ -27,7 +27,7 @@ export async function createAgentExecutor() {
   const agentExecutor = new AgentExecutor({
     agent,
     tools,
-    verbose: true,
+    verbose: false,
   });
 
   return agentExecutor;
