@@ -1,18 +1,15 @@
 import { controller } from "@/ableton/controller";
 import { logger } from "@/logger";
-import { DynamicStructuredTool } from "langchain/tools";
-import { z } from "zod";
+import { DynamicTool } from "langchain/tools";
 
-const setTempoTool = new DynamicStructuredTool({
-  name: "set_tempo",
-  description: "Sets the BPM of the song",
-  schema: z.object({
-    bpm: z.number().min(1).max(300),
-  }),
-  async func(input, runManager) {
-    logger.info(`Setting tempo to ${input.bpm}`);
-    await controller.song.setTempo(input.bpm);
-    return "Tempo set!";
+const setTempoTool = new DynamicTool({
+  name: "setTempo",
+  description: "Set the BPM of the song",
+  func: async (input: string) => {
+    const bpm = parseInt(input);
+    logger.info(`Setting tempo to ${bpm} BPM`);
+    await controller.song.setTempo(bpm);
+    return `Tempo set to ${input} BPM`;
   },
 });
 
